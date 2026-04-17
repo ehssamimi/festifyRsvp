@@ -32,6 +32,17 @@
 
   <title>Festify Web</title>
 
+  <!-- Drop legacy Flutter service workers so cached bundles cannot stick after deploys. -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function (registrations) {
+        for (var i = 0; i < registrations.length; i++) {
+          registrations[i].unregister();
+        }
+      });
+    }
+  </script>
+
   <style>
     body {
       margin: 0;
