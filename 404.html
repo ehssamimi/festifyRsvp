@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Festify Web App">
+
+  <script>
+    // Single-page application routing for Flutter with go_router
+    // This script redirects all requests back to the index.html page
+    // while preserving the original URL for the router to handle
+    
+    const pathSegmentsToKeep = 0; // Change this depending on your deployment path
+    
+    const location = window.location;
+    const pathName = location.pathname;
+    
+    // Redirect to the index.html page with the full URL in the query string
+    const redirectUrl = location.protocol + '//' + location.hostname + 
+      (location.port ? ':' + location.port : '') +
+      pathName.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
+      pathName.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+      (location.search ? '&' + location.search.slice(1).replace(/&/g, '~and~') : '') +
+      location.hash;
+      
+    window.location.replace(redirectUrl);
+  </script>
+</head>
+<body>
+</body>
+</html> 
